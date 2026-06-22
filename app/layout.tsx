@@ -2,11 +2,11 @@ import type React from "react"
 import "./globals.css"
 import { Inter } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata = {
   title: "Jonathan's Website",
-  description: "Personal portfolio of Jonathan Ginevro."
+  description: "Software developer based in Toronto",
 }
 
 export default function RootLayout({
@@ -20,5 +20,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-import './globals.css'
