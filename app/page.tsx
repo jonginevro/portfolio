@@ -189,7 +189,7 @@ export default function Home() {
 
         {/* Center — scrollable content */}
         <section ref={scrollRef} className="flex-1 h-full overflow-y-auto min-w-0 scrollbar-hide">
-          <div className="max-w-2xl p-10 space-y-16">
+          <div className="p-10 space-y-16">
 
             {/* Experience */}
             <div id="experience">
@@ -264,12 +264,7 @@ export default function Home() {
             {/* Contact */}
             <div id="contact" className="pb-10">
               <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-8">Contact</p>
-              {status === "success" ? (
-                <p className="text-sm text-neutral-500">
-                  Message sent. I&apos;ll get back to you soon.
-                </p>
-              ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Name</label>
@@ -287,17 +282,19 @@ export default function Home() {
                   <div className="flex items-center gap-4">
                     <button
                       type="submit"
-                      disabled={pending}
+                      disabled={pending || status === "success"}
                       className="px-4 py-2 text-xs tracking-[0.12em] uppercase border border-black/[0.08] dark:border-white/[0.08] text-neutral-500 rounded hover:text-neutral-900 dark:hover:text-white hover:border-red-500/40 hover:bg-red-500/[0.07] transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       {pending ? "Sending…" : "Send"}
                     </button>
+                    {status === "success" && (
+                      <p className="text-xs text-neutral-500">Message sent. I&apos;ll get back to you soon.</p>
+                    )}
                     {status === "error" && (
                       <p className="text-xs text-red-500/70">Something went wrong. Please try again.</p>
                     )}
                   </div>
                 </form>
-              )}
             </div>
 
           </div>
@@ -450,36 +447,35 @@ export default function Home() {
 
         <div className="pb-8">
           <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-8">Contact</p>
-          {status === "success" ? (
-            <p className="text-sm text-neutral-500">Message sent. I&apos;ll get back to you soon.</p>
-          ) : (
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Name</label>
-                <input name="name" type="text" required placeholder="Your name" className={inputClass} />
-              </div>
-              <div>
-                <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Email</label>
-                <input name="email" type="email" required placeholder="your@email.com" className={inputClass} />
-              </div>
-              <div>
-                <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Message</label>
-                <textarea name="message" required rows={9} placeholder="What's on your mind?" className={`${inputClass} resize-none`} />
-              </div>
-              <div className="flex items-center gap-4">
-                <button
-                  type="submit"
-                  disabled={pending}
-                  className="px-4 py-2 text-xs tracking-[0.12em] uppercase border border-black/[0.08] dark:border-white/[0.08] text-neutral-500 rounded hover:text-neutral-900 dark:hover:text-white hover:border-red-500/40 hover:bg-red-500/[0.07] transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  {pending ? "Sending…" : "Send"}
-                </button>
-                {status === "error" && (
-                  <p className="text-xs text-red-500/70">Something went wrong. Please try again.</p>
-                )}
-              </div>
-            </form>
-          )}
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Name</label>
+              <input name="name" type="text" required placeholder="Your name" className={inputClass} />
+            </div>
+            <div>
+              <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Email</label>
+              <input name="email" type="email" required placeholder="your@email.com" className={inputClass} />
+            </div>
+            <div>
+              <label className="text-[10px] tracking-[0.16em] uppercase text-neutral-300 dark:text-neutral-700 block mb-2">Message</label>
+              <textarea name="message" required rows={9} placeholder="What's on your mind?" className={`${inputClass} resize-none`} />
+            </div>
+            <div className="flex items-center gap-4">
+              <button
+                type="submit"
+                disabled={pending || status === "success"}
+                className="px-4 py-2 text-xs tracking-[0.12em] uppercase border border-black/[0.08] dark:border-white/[0.08] text-neutral-500 rounded hover:text-neutral-900 dark:hover:text-white hover:border-red-500/40 hover:bg-red-500/[0.07] transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {pending ? "Sending…" : "Send"}
+              </button>
+              {status === "success" && (
+                <p className="text-xs text-neutral-500">Message sent. I&apos;ll get back to you soon.</p>
+              )}
+              {status === "error" && (
+                <p className="text-xs text-red-500/70">Something went wrong. Please try again.</p>
+              )}
+            </div>
+          </form>
         </div>
       </div>
 
