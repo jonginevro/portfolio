@@ -189,7 +189,7 @@ export default function Home() {
 
         {/* Center — scrollable content */}
         <section ref={scrollRef} className="flex-1 h-full overflow-y-auto min-w-0 scrollbar-hide">
-          <div className="p-10 space-y-16">
+          <div className="max-w-[700px] p-10 space-y-16">
 
             {/* Experience */}
             <div id="experience">
