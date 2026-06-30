@@ -73,12 +73,31 @@ export default function Home() {
   useEffect(() => setMounted(true), [])
 
   useEffect(() => {
+    const adjust = () => {
+      const vh = window.innerHeight
+      const size = Math.min(Math.max((vh / 900) * 16, 12), 20)
+      document.documentElement.style.fontSize = `${size}px`
+    }
+    adjust()
+    window.addEventListener("resize", adjust)
+    return () => {
+      window.removeEventListener("resize", adjust)
+      document.documentElement.style.fontSize = ""
+    }
+  }, [])
+
+  useEffect(() => {
     const container = scrollRef.current
     if (!container) return
 
     const handleScroll = () => {
       if (isProgrammaticScroll.current) return
-      const triggerY = container.getBoundingClientRect().top + 40
+      const containerRect = container.getBoundingClientRect()
+      const { scrollTop, scrollHeight, clientHeight } = container
+      const offset = parseFloat(getComputedStyle(container).paddingTop) || 40
+      const scrollProgress = scrollHeight > clientHeight ? scrollTop / (scrollHeight - clientHeight) : 0
+      const triggerOffset = offset + (clientHeight * 0.7 - offset) * scrollProgress
+      const triggerY = containerRect.top + triggerOffset
       let current = navSections[0].id
       for (const { id } of navSections) {
         const el = container.querySelector(`#${id}`) as HTMLElement
@@ -100,7 +119,7 @@ export default function Home() {
     setActive(id)
     isProgrammaticScroll.current = true
     clearTimeout(scrollEndTimer.current)
-    const offset = 40
+    const offset = parseFloat(getComputedStyle(container).paddingTop) || 40
     container.scrollTo({
       top: container.scrollTop + el.getBoundingClientRect().top - container.getBoundingClientRect().top - offset,
       behavior: "smooth",
@@ -477,6 +496,7 @@ export default function Home() {
             </div>
           </form>
         </div>
+
       </div>
 
     </div>
