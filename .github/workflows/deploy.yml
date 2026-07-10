@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -18,10 +19,28 @@ jobs:
           node-version: 20
           cache: npm
 
+      # 1. Build the portfolio (Next.js static export) -> ./out
       - run: npm ci
-
       - run: npm run build
 
+      # 2. Build homebase-v2 -> ./out/homebase
+      - name: Build homebase
+        run: |
+          git clone --depth 1 https://github.com/jonginevro/homebase-v2.git "$RUNNER_TEMP/homebase"
+          cd "$RUNNER_TEMP/homebase"
+          npm ci
+          npm run build   # base is '/homebase/' in vite.config.js
+          mkdir -p "$GITHUB_WORKSPACE/out/homebase"
+          cp -r dist/. "$GITHUB_WORKSPACE/out/homebase/"
+
+      # 3. Drop in the nba static site -> ./out/momentum
+      - name: Add nba-momentum-charts
+        run: |
+          git clone --depth 1 https://github.com/jonginevro/nba-momentum-charts.git "$RUNNER_TEMP/nba"
+          mkdir -p "$GITHUB_WORKSPACE/out/momentum"
+          cp -r "$RUNNER_TEMP/nba/docs/." "$GITHUB_WORKSPACE/out/momentum/"
+
+      # 4. Publish the combined output
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
