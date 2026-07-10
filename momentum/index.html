@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NBA Momentum Charts 2025-26</title>
+<meta name="description" content="World-Cup-style momentum charts for every NBA game of the 2025-26 season." />
+<link rel="preconnect" href="https://a.espncdn.com" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>NBA Momentum Charts 2025-26</h1>
+  </div>
+  <nav>
+    <a href="https://github.com/sportsdataverse/hoopR-nba-data" target="_blank" rel="noopener">Data</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h2>Every game as a wave of momentum.</h2>
+    <p>Inspired by the World&nbsp;Cup momentum charts, this reads all
+      <span id="game-count">…</span> games of the 2025&#8209;26 NBA season and turns each one
+      into a single curve: a time&#8209;decayed measure of which team is on a run.
+      Above the line is the home team, below is the away team.</p>
+  </section>
+
+  <section class="featured" id="featured" aria-label="Featured games"></section>
+
+  <section class="app">
+    <aside class="sidebar">
+      <div class="filters">
+        <input id="search" type="search" placeholder="Filter by team" autocomplete="off" />
+        <div class="filter-row">
+          <select id="season-type">
+            <option value="">All games</option>
+            <option value="Regular Season">Regular Season</option>
+            <option value="Play-In">Play-In</option>
+            <option value="Playoffs">Playoffs</option>
+          </select>
+          <select id="sort">
+            <option value="date-desc">Newest first</option>
+            <option value="date-asc">Oldest first</option>
+            <option value="lead_changes">Most lead changes</option>
+            <option value="comeback">Biggest comeback</option>
+            <option value="swing">Most back-and-forth</option>
+          </select>
+        </div>
+        <div class="result-count" id="result-count"></div>
+      </div>
+      <ul class="game-list" id="game-list"></ul>
+    </aside>
+
+    <div class="stage">
+      <div class="scoreboard" id="scoreboard"></div>
+      <div class="chart-wrap">
+        <canvas id="chart"></canvas>
+        <div class="tooltip" id="tooltip" hidden></div>
+      </div>
+      <div class="chart-legend" id="chart-legend"></div>
+      <div class="keystats" id="keystats"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Jonathan Ginevro&nbsp; · &nbsp;Toronto, 2026&nbsp; · &nbsp;Data from ESPN's Public API</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
