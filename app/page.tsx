@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin, Briefcase, GraduationCap, MapPin, Sun, Moon } from "lucide-react"
+import { Github, Linkedin, Briefcase, GraduationCap, MapPin, Sun, Moon, ArrowUpRight } from "lucide-react"
 import { useEffect, useRef, useState, useTransition } from "react"
 import { useTheme } from "next-themes"
 
@@ -25,6 +25,23 @@ const experience = [
     period: "Summer 2022",
     description:
       "Contributed as a full-stack developer across consumer-facing digital banking platforms. Built a client verification system now live in the RBC mobile app, enabling returning customers to be automatically reconnected to their existing accounts.",
+  },
+]
+
+const projects = [
+  {
+    name: "Homebase",
+    description:
+      "MLB live scores, standings, and player stats. A fast React app that pulls real-time game data straight from the MLB Stats API.",
+    live: "https://jonginevro.com/homebase/",
+    source: "https://github.com/jonginevro/homebase-v2",
+  },
+  {
+    name: "NBA Momentum Charts",
+    description:
+      "World-Cup-style momentum charts for every NBA game of the 2025-26 season, built from play-by-play data with a time-decayed scoring model.",
+    live: "https://jonginevro.com/momentum/",
+    source: "https://github.com/jonginevro/nba-momentum-charts",
   },
 ]
 
@@ -54,6 +71,7 @@ const skills = [
 
 const navSections = [
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
   { id: "technologies", label: "Technologies" },
   { id: "contact", label: "Contact" },
@@ -224,6 +242,31 @@ export default function Home() {
                       <span className="text-xs text-neutral-400 dark:text-neutral-600 font-mono shrink-0">{job.period}</span>
                     </div>
                     <p className="text-neutral-500 text-sm leading-relaxed">{job.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Projects */}
+            <div id="projects">
+              <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-10">Projects</p>
+              <div className="space-y-10">
+                {projects.map((p) => (
+                  <div key={p.name}>
+                    <div className="flex items-baseline justify-between gap-6 mb-3">
+                      <h2 className="font-semibold">{p.name}</h2>
+                      <div className="flex items-center gap-4 shrink-0">
+                        <a href={p.live} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                          <ArrowUpRight size={13} /> Live
+                        </a>
+                        <a href={p.source} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                          <Github size={13} /> Source
+                        </a>
+                      </div>
+                    </div>
+                    <p className="text-neutral-500 text-sm leading-relaxed">{p.description}</p>
                   </div>
                 ))}
               </div>
@@ -415,6 +458,30 @@ export default function Home() {
                 </div>
                 <p className="text-neutral-500 dark:text-neutral-400 text-xs mb-3">{job.role}</p>
                 <p className="text-neutral-500 text-sm leading-relaxed">{job.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-8">Projects</p>
+          <div className="space-y-10">
+            {projects.map((p) => (
+              <div key={p.name}>
+                <div className="flex items-center justify-between gap-4 mb-1">
+                  <h2 className="font-semibold">{p.name}</h2>
+                  <div className="flex items-center gap-4 shrink-0">
+                    <a href={p.live} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                      <ArrowUpRight size={13} /> Live
+                    </a>
+                    <a href={p.source} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                      <Github size={13} /> Source
+                    </a>
+                  </div>
+                </div>
+                <p className="text-neutral-500 text-sm leading-relaxed mt-2">{p.description}</p>
               </div>
             ))}
           </div>
