@@ -77,15 +77,15 @@ const skills = [
 ]
 
 const navSections = [
-  { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
   { id: "technologies", label: "Technologies" },
   { id: "contact", label: "Contact" },
 ]
 
 export default function Home() {
-  const [active, setActive] = useState("projects")
+  const [active, setActive] = useState("experience")
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [pending, startTransition] = useTransition()
   const [mounted, setMounted] = useState(false)
@@ -235,6 +235,25 @@ export default function Home() {
         <section ref={scrollRef} className="flex-1 h-full overflow-y-auto min-w-0 scrollbar-hide">
           <div className="max-w-[700px] p-10 space-y-16">
 
+            {/* Experience */}
+            <div id="experience">
+              <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-10">Experience</p>
+              <div className="space-y-10">
+                {experience.map((job, i) => (
+                  <div key={i}>
+                    <div className="flex items-baseline justify-between gap-6 mb-3">
+                      <div>
+                        <h2 className="font-semibold">{job.company}</h2>
+                        <p className="text-neutral-500 dark:text-neutral-400 text-xs mt-1">{job.role}</p>
+                      </div>
+                      <span className="text-xs text-neutral-400 dark:text-neutral-600 font-mono shrink-0">{job.period}</span>
+                    </div>
+                    <p className="text-neutral-500 text-sm leading-relaxed">{job.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Projects */}
             <div id="projects">
               <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-10">Projects</p>
@@ -255,25 +274,6 @@ export default function Home() {
                       </div>
                     </div>
                     <p className="text-neutral-500 text-sm leading-relaxed">{p.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Experience */}
-            <div id="experience">
-              <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-10">Experience</p>
-              <div className="space-y-10">
-                {experience.map((job, i) => (
-                  <div key={i}>
-                    <div className="flex items-baseline justify-between gap-6 mb-3">
-                      <div>
-                        <h2 className="font-semibold">{job.company}</h2>
-                        <p className="text-neutral-500 dark:text-neutral-400 text-xs mt-1">{job.role}</p>
-                      </div>
-                      <span className="text-xs text-neutral-400 dark:text-neutral-600 font-mono shrink-0">{job.period}</span>
-                    </div>
-                    <p className="text-neutral-500 text-sm leading-relaxed">{job.description}</p>
                   </div>
                 ))}
               </div>
@@ -455,6 +455,22 @@ export default function Home() {
         </div>
 
         <div>
+          <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-8">Experience</p>
+          <div className="space-y-10">
+            {experience.map((job, i) => (
+              <div key={i}>
+                <div className="flex items-baseline justify-between gap-4 mb-1">
+                  <h2 className="font-semibold">{job.company}</h2>
+                  <span className="text-xs text-neutral-400 dark:text-neutral-600 font-mono shrink-0">{job.period}</span>
+                </div>
+                <p className="text-neutral-500 dark:text-neutral-400 text-xs mb-3">{job.role}</p>
+                <p className="text-neutral-500 text-sm leading-relaxed">{job.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
           <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-8">Projects</p>
           <div className="space-y-10">
             {projects.map((p) => (
@@ -473,22 +489,6 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-neutral-500 text-sm leading-relaxed mt-2">{p.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-400 dark:text-neutral-600 mb-8">Experience</p>
-          <div className="space-y-10">
-            {experience.map((job, i) => (
-              <div key={i}>
-                <div className="flex items-baseline justify-between gap-4 mb-1">
-                  <h2 className="font-semibold">{job.company}</h2>
-                  <span className="text-xs text-neutral-400 dark:text-neutral-600 font-mono shrink-0">{job.period}</span>
-                </div>
-                <p className="text-neutral-500 dark:text-neutral-400 text-xs mb-3">{job.role}</p>
-                <p className="text-neutral-500 text-sm leading-relaxed">{job.description}</p>
               </div>
             ))}
           </div>
