@@ -40,7 +40,31 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out/momentum"
           cp -r "$RUNNER_TEMP/nba/docs/." "$GITHUB_WORKSPACE/out/momentum/"
 
-      # 4. Publish the combined output
+      # 4. breakout-board is a live Streamlit app
+      - name: Add breakout-board redirect
+        env:
+          BREAKOUT_URL: https://breakout-board.streamlit.app
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/out/breakout-board"
+          cat > "$GITHUB_WORKSPACE/out/breakout-board/index.html" <<EOF
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <title>Fantasy Breakout Board — redirecting…</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="canonical" href="${BREAKOUT_URL}" />
+            <meta http-equiv="refresh" content="0; url=${BREAKOUT_URL}" />
+            <script>window.location.replace("${BREAKOUT_URL}");</script>
+          </head>
+          <body style="font-family:system-ui,sans-serif;padding:2rem">
+            Redirecting to the Fantasy Breakout Board…
+            <a href="${BREAKOUT_URL}">Continue</a>
+          </body>
+          </html>
+          EOF
+
+      # 5. Publish the combined output
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
