@@ -183,7 +183,7 @@ export default function Home() {
     <div className="bg-white dark:bg-[#111111] text-neutral-900 dark:text-white">
 
       {/* ── Desktop ── */}
-      <div className="h-screen overflow-hidden hidden md:flex">
+      <div className="h-screen overflow-hidden hidden md:flex max-w-[1400px] mx-auto border-x border-black/[0.07] dark:border-white/[0.07]">
 
         {/* Left — identity */}
         <aside className="w-[320px] shrink-0 h-full border-r border-black/[0.07] dark:border-white/[0.07] p-10 flex flex-col justify-between">
@@ -191,7 +191,7 @@ export default function Home() {
             <span className="text-[11px] tracking-[0.18em] uppercase text-red-500 font-medium">
               Software Developer
             </span>
-            <h1 className="text-5xl font-bold tracking-tight leading-[1.08]">
+            <h1 className="text-[2.5rem] font-bold tracking-tight leading-[1.08]">
               Jonathan<br />Ginevro
             </h1>
             <div className="flex flex-col gap-2.5 pt-1">
