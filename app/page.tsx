@@ -32,7 +32,7 @@ const projects = [
   {
     name: "Fantasy Breakout Board",
     description:
-      "A live tool that ranks NFL skill players by breakout potential: combining opportunity, catalyst, efficiency, and value into a single score rather than measuring how good they already are. Built with Streamlit on live nflverse and Sleeper data.",
+      "A live tool that ranks fantasy football players by breakout potential: combining opportunity, catalyst, efficiency, and value into a single score rather than measuring how good they already are.",
     live: "https://jonginevro.com/breakout-board/",
     source: "https://github.com/jonginevro/breakout-board",
   },
