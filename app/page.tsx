@@ -183,7 +183,7 @@ export default function Home() {
     <div className="bg-white dark:bg-[#111111] text-neutral-900 dark:text-white">
 
       {/* ── Desktop ── */}
-      <div className="h-screen overflow-hidden hidden md:flex max-w-[1400px] mx-auto border-x border-black/[0.07] dark:border-white/[0.07]">
+      <div className="h-screen overflow-hidden hidden md:flex">
 
         {/* Left — identity */}
         <aside className="w-[320px] shrink-0 h-full border-r border-black/[0.07] dark:border-white/[0.07] p-10 flex flex-col justify-between">
